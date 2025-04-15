@@ -1,15 +1,34 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+
+int is_hex(const char* str) {
+    return (str[0] == '0' && (str[1] == 'x' || str[1] == 'X'));
+}
 
 int main() {
     char operator;
+    char input1[100], input2[100];
     double num1, num2;
 
     // Ask the user for input
     printf("Enter an operator (+, -, *, /): ");
-    scanf(" %c", &operator);  // note the space before %c to ignore any leftover newline
+    scanf(" %c", &operator);  // space before %c to skip newline
 
-    printf("Enter two numbers: ");
-    scanf("%lf %lf", &num1, &num2);
+    printf("Enter two numbers (decimal or hex with 0x prefix): ");
+    scanf("%s %s", input1, input2);
+
+    // Detect if input is hexadecimal or decimal
+    if (is_hex(input1))
+        num1 = (double)strtol(input1, NULL, 16);
+    else
+        num1 = atof(input1);
+
+    if (is_hex(input2))
+        num2 = (double)strtol(input2, NULL, 16);
+    else
+        num2 = atof(input2);
 
     // Perform the operation
     switch (operator) {

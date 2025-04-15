@@ -10,7 +10,7 @@ int is_hex(const char* str) {
 int main() {
     char operator;
     char input1[100], input2[100];
-    double num1, num2;
+    double num1, num2; // addding the comment
 
     // Ask the user for input
     printf("Enter an operator (+, -, *, /): ");
